@@ -5,6 +5,7 @@ import style from './css.module.scss'
 
 export default function FirstCoin({priceList,loading}) {
   const [selectedCoin, setCoin] = useState({})
+  const [firstPrice,setFirstPrice] = useState('0')
   const [firstResult,setFirstResult] = useState('0')
   const [selectedCoinSecond, setCoinSecond] = useState({price:0})
   const [SecondResult,setSecondResult] = useState('0')
@@ -16,7 +17,7 @@ export default function FirstCoin({priceList,loading}) {
   }
 
   const firstCalc = (e) => {
-    setFirstResult(e.target.value/selectedCoin.price)
+    setFirstResult(firstPrice/selectedCoin?.price)
   }
 
   const findPriceSecond = (e) => {
@@ -34,11 +35,12 @@ export default function FirstCoin({priceList,loading}) {
   }
 
   const ThirdCalc = (e) => {
-    setThirdResult(SecondResult/selectedCoinThird?.price)
+    setThirdResult(SecondResult*selectedCoinThird?.price)
   }
 
   useEffect(()=>{
     setCoin(priceList.find((i)=> i.label === selectedCoin?.label))
+    firstCalc()
     setCoinSecond(priceList.find((i)=> i.label === selectedCoinSecond?.label))
     SecondCalc()
     setCoinThird(priceList.find((i)=> i.label === selectedCoinThird?.label))
@@ -62,7 +64,7 @@ export default function FirstCoin({priceList,loading}) {
         <TextField disabled id="outlined-disabled" label="Цена:" value={isNaN((Number(selectedCoin?.price)).toFixed(5)) ? '0' : (Number(selectedCoin?.price)).toFixed(5)} />
       </div>
       <div className={style.row}>
-        <TextField id="outlined-basic" label="Сколько тратим, 2-й монет?" variant="outlined" onChange={firstCalc}/>
+        <TextField id="outlined-basic" label="Сколько тратим, 2-й монет?" variant="outlined" onChange={(e)=>setFirstPrice(e.target.value)}/>
         <TextField disabled id="outlined-disabled" label="Получим монет:" value={firstResult} />
       </div>
       </div>
