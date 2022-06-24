@@ -1,0 +1,30 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    h2 {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .content {
+        padding: 30px;
+        padding-top: 0;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        display: flex;
+        gap: 30px;
+        justify-content: center;
+    
+        .row {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+    
+            .price {
+                margin: 0;
+            }
+        }
+    }
+}
